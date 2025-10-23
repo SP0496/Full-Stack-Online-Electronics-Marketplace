@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location-Based Delivery & Offers</title>
+    <link rel="stylesheet" href="location-delivery.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css">
+    <script src="https://kit.fontawesome.com/5e9666b4ec.js" crossorigin="anonymous"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- OpenWeather API -->
+    <script src="https://api.openweathermap.org/data/2.5/weather.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">
+                <i class="bi bi-google-play"></i>Electronic-Store
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="location-delivery.html">Location & Delivery</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="cart-icon" id="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-amount">₹0</span>
+            </div>
+            <div class="delivery-options">
+                <h4>Delivery Options</h4>
+                <div class="delivery-option">
+                    <input type="radio" name="delivery" id="standard" value="standard" checked>
+                    <label for="standard">Standard Delivery (1-2 hours)</label>
+                </div>
+                <div class="delivery-option">
+                    <input type="radio" name="delivery" id="express" value="express">
+                    <label for="express">Express Delivery (30-45 mins)</label>
+                </div>
+                <div class="delivery-option">
+                    <input type="radio" name="delivery" id="scheduled" value="scheduled">
+                    <label for="scheduled">Scheduled Delivery</label>
+                </div>
+            </div>
+            <button class="checkout-btn" id="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <div class="container main-container">
+        <header>
+            <h1>Location-Based Delivery & Offers</h1>
+            <div class="weather-info">
+                <div id="weather-display">
+                    <i class="fas fa-cloud-sun"></i>
+                    <span id="temperature">--°C</span>
+                    <span id="weather-description">Loading weather...</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="delivery-zones">
+                <h2>Delivery Zones</h2>
+                <div class="zone-info">
+                    <div class="zone standard">
+                        <h3>Standard Zone (0-5 km)</h3>
+                        <p>Delivery Time: 1-2 hours</p>
+                        <p>Delivery Fee: ₹0</p>
+                    </div>
+                    <div class="zone extended">
+                        <h3>Extended Zone (5-10 km)</h3>
+                        <p>Delivery Time: 2-3 hours</p>
+                        <p>Delivery Fee: ₹50</p>
+                    </div>
+                    <div class="zone premium">
+                        <h3>Premium Zone (10-15 km)</h3>
+                        <p>Delivery Time: 3-4 hours</p>
+                        <p>Delivery Fee: ₹100</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="location-info">
+                    <h3>Your Location</h3>
+                    <p id="current-address">Detecting your location...</p>
+                    <button id="detect-location" class="btn">
+                        <i class="fas fa-location-arrow"></i> Detect Location
+                    </button>
+                </div>
+            </div>
+
+            <div class="local-offers">
+                <h2>Local Offers</h2>
+                <div id="offers-container">
+                    <!-- Offers will be dynamically populated -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container">
+        <button class="chatbot-button">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chatbot-window">
+            <div class="chatbot-header">
+                <h3>AI Assistant</h3>
+                <button class="close-button">&times;</button>
+            </div>
+            <div class="chatbot-messages"></div>
+            <div class="chatbot-input">
+                <input type="text" placeholder="Type your message...">
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="location-delivery.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html> 
